@@ -11,13 +11,17 @@
                     <el-table-column prop="name" label="名称" width="180"/>
                     <el-table-column prop="date" label="日期" width="180"/>
                     <el-table-column prop="photo" label="图片">
-                        <template v-slot="scope">
-                            <el-image :src="src" style="width:50px;height:50px"/>
+                        <template #default="scope">
+                            <el-image :src="scope.row.src" style="width:50px;height:50px"/>
                         </template>
                     </el-table-column>
                     <el-table-column prop="label" label="标签">
-                        <el-input placeholder="Please input" v-if=""/>
-                        <el-button type="success" :icon="Check" circle />
+                        <template #default="scope">
+                            <el-input v-model.trim="scope.row.inputValue" @blur="onInputConfig(scope.row)" :id="scope.row.id" placeholder="Please input" v-if="scope.row.flag"/>
+                            <label :for="scope.row.id" v-else>
+                                <el-button @click="scope.row.flag = !scope.row.flag" type="success" :icon="Check" circle />
+                            </label>
+                        </template>
                     </el-table-column>
                     <el-table-column prop="operation" label="操作">
                         <el-button type="danger" :icon="Delete" circle/>
@@ -45,33 +49,51 @@
             return {
                 tableData: [
                     {
+                        id:1,
                         date: '2016-05-03',
                         name: 'Tom',
                         address: 'No. 189, Grove St, Los Angeles',
-                        photo: '../assets/logo.png'
+                        src: '../src/assets/logo.png',
+                        flag:false,
+                        inputValue:''
                     },
                     {
+                        id:2,
                         date: '2016-05-02',
                         name: 'Tom',
                         address: 'No. 189, Grove St, Los Angeles',
-                        photo: ''
+                        src: '../src/assets/logo.png',
+                        flag:false,
+                        inputValue:''
                     },
                     {
+                        id:3,
                         date: '2016-05-04',
                         name: 'Tom',
                         address: 'No. 189, Grove St, Los Angeles',
-                        photo: '../assets/logo.png'
+                        src: '../src/assets/logo.png',
+                        flag:false,
+                        inputValue:''
                     },
                     {
+                        id:4,
                         date: '2016-05-01',
                         name: 'Tom',
                         address: 'No. 189, Grove St, Los Angeles',
-                        photo: '../assets/logo.png'
+                        src: '../src/assets/logo.png',
+                        flag:false,
+                        inputValue:''
                     },
                 ],
                 Delete: Delete,
                 Check:Check,
-                src:"https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+            }
+        },
+        methods:{
+            onInputConfig(row){
+                const val = row.inputValue
+                row.inputValue = ''
+                row.flag = false
             }
         }
     }
