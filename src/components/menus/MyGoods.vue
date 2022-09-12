@@ -8,7 +8,7 @@
                     <el-input class="w-50 m-2"/>
                     <el-button type="primary">添加</el-button>
                 </el-form-item>
-                <el-table :data="tableData" style="width: 100%" height="380">
+                <el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%">
                         <el-table-column type="selection"/>
                         <el-table-column prop="name" label="名称" width="100"/>
                         <el-table-column prop="gender" label="性别" width="90"/>
@@ -35,6 +35,15 @@
                         <el-button type="danger" :icon="Delete" circle/>
                     </el-table-column>
                 </el-table>
+                <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="[5, 10, 50, 100]"
+                        :page-size="pagesize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="tableData.length">
+                </el-pagination>
             </el-main>
             <el-footer>Footer</el-footer>
         </el-container>
@@ -183,7 +192,9 @@
                 }),
                 Delete: Delete,
                 Check:Check,
-                dialogFlag:false
+                dialogFlag:false,
+                currentPage:1,
+                pagesize:20,
             }
         },
         methods:{
@@ -197,6 +208,12 @@
                 this.dialogFlag = true
                 this.form.name = scope.row.name
                 this.form.resource = scope.row.gender
+            },
+            handleSizeChange: function (size) {
+                this.pagesize = size;
+            },
+            handleCurrentChange: function(currentPage){
+                this.currentPage = currentPage;
             }
         }
     }
