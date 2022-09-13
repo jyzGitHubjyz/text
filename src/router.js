@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 
-import LoginMain from "./components/LoginMain.vue";
+//import LoginMain from "./components/LoginMain.vue";
 import LoginHome from "./components/LoginHome.vue";
 
 import MyUsers from "./components/menus/MyUsers.vue";
@@ -14,7 +14,10 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {path: '/', redirect: '/login'},
-        {path: '/login', component: LoginMain, name: 'LoginMain'},
+        {path: '/login',
+            //component: LoginMain,
+            component: () => import("./components/LoginMain.vue"),
+            name: 'LoginMain'},
         {
             path: '/home',
             redirect: '/home/users',

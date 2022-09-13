@@ -6,36 +6,41 @@
                  default-active="2"
                  text-color="#fff"
                  :router="true">
-            <el-menu-item index="/home/users">
-                <template #title>
-                    <span>用户管理</span>
+            <template v-for="item in menusList">
+                <template v-if="item.subs">
+                    <el-sub-menu :index="item.index" :key="item.index">
+                        <template #title>
+                            <el-icon>
+                                <compont :is="item.icon"></compont>
+                            </el-icon>
+                            <span>{{item.title}}</span>
+                        </template>
+                        <template v-for="subItem in item.subs">
+                            <el-sub-menu
+                                    v-if="subItem.subs"
+                                    :index="subItem.index"
+                                    :key="subItem.index"
+                            >
+                                <template #title>{{ subItem.title }}</template>
+                                <el-menu-item v-for="(threeItem, i) in subItem.subs" :key="i" :index="threeItem.index">
+                                    {{ threeItem.title }}
+                                </el-menu-item>
+                            </el-sub-menu>
+                            <el-menu-item v-else :index="subItem.index">
+                                {{ subItem.title }}
+                            </el-menu-item>
+                        </template>
+                    </el-sub-menu>
                 </template>
-            </el-menu-item>
-            <el-menu-item index="/home/rights">
-                <span>权限管理</span>
-            </el-menu-item>
-            <el-menu-item index="/home/goods">
-                <span>商品管理</span>
-            </el-menu-item>
-            <el-menu-item index="/home/orders">
-                <span>订单管理</span>
-            </el-menu-item>
-            <el-sub-menu index="/home/settings">
-                <template #title>
-                <span>系统设置</span>
+                <template v-else>
+                    <el-menu-item :index="item.index" :key="item.index">
+                        <el-icon>
+                            <component :is="item.icon"></component>
+                        </el-icon>
+                        <template #title>{{ item.title }}</template>
+                    </el-menu-item>
                 </template>
-                <el-menu-item-group title="Group One">
-                    <el-menu-item index="4-1">item one</el-menu-item>
-                    <el-menu-item index="1-2">item two</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="Group Two">
-                    <el-menu-item index="1-3">item three</el-menu-item>
-                </el-menu-item-group>
-                <el-sub-menu index="1-4">
-                    <template #title>item four</template>
-                    <el-menu-item index="1-4-1">item one</el-menu-item>
-                </el-sub-menu>
-            </el-sub-menu>
+            </template>
         </el-menu>
     </div>
 </template>
@@ -45,7 +50,69 @@
     export default {
         name: "MyAside",
         data() {
-            return {}
+            return {
+                menusList:[
+                    {
+                        icon: 'Odometer',
+                        index: '/home/users',
+                        title: '用户管理',
+                        permiss: '1'
+                    },
+                    {
+                        icon: 'Calendar',
+                        index: '/home/rights',
+                        title: '权限管理',
+                        permiss: '2'
+                    },
+                    {
+                        icon: 'DocumentCopy',
+                        index: '/home/goods',
+                        title: '商品管理',
+                        permiss: '3'
+                    },
+                    {
+                        icon: 'DocumentCopy',
+                        index: '/home/orders',
+                        title: '订单管理',
+                        permiss: '3'
+                    },
+                    {
+                        icon: 'Edit',
+                        index: '/home/settings',
+                        title: '系统设置',
+                        permiss: '4',
+                        subs: [
+                            {
+                                index: '/form',
+                                title: '基本表单',
+                                permiss: '5'
+                            },
+                            {
+                                index: '/upload',
+                                title: '文件上传',
+                                permiss: '6'
+                            },
+                            {
+                                index: '4',
+                                title: '三级菜单',
+                                permiss: '7',
+                                subs: [
+                                    {
+                                        index: '/editor',
+                                        title: '富文本编辑器',
+                                        permiss: '8'
+                                    },
+                                    {
+                                        index: '/markdown',
+                                        title: 'markdown编辑器',
+                                        permiss: '9'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                ]
+            }
         }
     }
 </script>
