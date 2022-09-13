@@ -30,7 +30,10 @@ export default {
 <style lang="less" scoped>
 .layout-header-container {
   height: 60px;
-  border-bottom: 1px solid #eaeaea;
+  width: 100%;
+  background-color: #242f42;
+  color: #fff;
+  font-size: 22px;
 }
 
 .layout-header-left-img {
