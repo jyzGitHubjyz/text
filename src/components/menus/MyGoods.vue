@@ -220,4 +220,7 @@
 </script>
 
 <style lang="less" scoped>
+    .common-layout{
+        height: 100%;
+    }
 </style>

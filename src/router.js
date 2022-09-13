@@ -1,8 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 
-//import LoginMain from "./components/LoginMain.vue";
-import LoginHome from "./components/LoginHome.vue";
-
 import MyUsers from "./components/menus/MyUsers.vue";
 import MyOrders from "./components/menus/MyOrders.vue";
 import MyRights from "./components/menus/MyRights.vue";
@@ -21,7 +18,8 @@ const router = createRouter({
         {
             path: '/home',
             redirect: '/home/users',
-            component: LoginHome,
+            //component: LoginHome,
+            component: () => import("./components/LoginHome.vue"),
             name: 'home',
             children: [
                 {path: 'users', component: MyUsers},
