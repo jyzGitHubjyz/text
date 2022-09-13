@@ -5,16 +5,13 @@
 
         <!-- 主体区域 -->
         <div class="home-main-box">
-
             <!-- 左侧边栏区域 -->
             <my-aside></my-aside>
-
-            <!-- 右侧内容主体区域 -->
-            <div class="home-main-body">
-                <!-- 路由的占位符 -->
-                <router-view></router-view>
-            </div>
-
+        </div>
+        <!-- 右侧内容主体区域 -->
+        <div class="home-main-body">
+            <!-- 路由的占位符 -->
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -37,15 +34,16 @@
     .home-container {
         height: 100%;
         display: flex;
-        flex-direction: column;
+        flex-flow: row wrap;
 
         .home-main-box {
-            height: 100%;
+            height: calc(100% - 60px);
             display: flex;
-            .home-main-body {
-                padding: 15px;
-                flex: 1;
-            }
+            width: 13%;
+        }
+        .home-main-body {
+            height: calc(100% - 60px);
+            width: 87%;
         }
     }
 </style>
