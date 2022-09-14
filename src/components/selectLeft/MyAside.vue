@@ -1,17 +1,18 @@
 <template>
     <div class="sidebar">
-        <el-menu active-text-color="#ffd04b"
-                 background-color="#545c64"
+        <el-menu
+                active-text-color="#20a0ff"
+                background-color="#324157"
                  class="el-menu-vertical-demo"
                  default-active="2"
-                 text-color="#fff"
+                text-color="#bfcbd9"
                  :router="true">
             <template v-for="item in menusList">
                 <template v-if="item.subs">
                     <el-sub-menu :index="item.index" :key="item.index">
                         <template #title>
                             <el-icon>
-                                <compont :is="item.icon"></compont>
+                                <component :is="item.icon"></component>
                             </el-icon>
                             <span>{{item.title}}</span>
                         </template>

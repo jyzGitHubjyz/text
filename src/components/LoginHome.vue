@@ -42,8 +42,10 @@
             width: 13%;
         }
         .home-main-body {
+            background-color: rgba(245, 245, 245, 1);
             height: calc(100% - 60px);
             width: 87%;
+            padding: 5px;
         }
     }
 </style>
